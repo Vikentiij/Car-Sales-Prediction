@@ -92,11 +92,8 @@ plt.show(block=True)
 #user_values = show_gui()
 #input_test_sample = user_values
 
-#input_test_sample = np.array([[0, 41.8,  62812.09, 11609.38, 238961.25]])
-#input_test_sample = np.array([[1, 46,  39814.522, 5958.460188, 326373.1812]])
-#input_test_sample = np.array([[1, 50,  51752.23445, 10985.69656, 629312.4041]])
-#input_test_sample = np.array([[0, 46,  58139.2591, 3440.823799, 630059.0274]])
-input_test_sample = np.array([[1, 43,  53457.10132, 12884.07868, 476643.3544]])
+input_test_sample = np.array([[0, 41.8,  62812.09, 11609.38, 238961.25]])
+
 
 
 
