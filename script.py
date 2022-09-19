@@ -22,8 +22,8 @@ data = pd.read_csv('car_sales_dataset.txt', encoding='ISO-8859-1')
 #print(data)
 
 #Plot data
-#sns.pairplot(data)
-#plt.show(block=True)
+sns.pairplot(data)
+plt.show(block=True)
 
 #Create input dataset from data
 inputs = data.drop(['Customer_Name', 'Customer_Email', 'Country', 'Purchase_Amount'], axis = 1)
@@ -80,7 +80,7 @@ plt.legend(['Training Loss', 'Validation Loss'])
 plt.show(block=True)
 
 
-#ann_viz(model, view=True)
+ann_viz(model, view=True)
 
 
 
@@ -92,7 +92,8 @@ plt.show(block=True)
 #user_values = show_gui()
 #input_test_sample = user_values
 
-input_test_sample = np.array([[0, 41.8,  62812.09, 11609.38, 238961.25]])
+#input_test_sample = np.array([[0, 41.8,  62812.09, 11609.38, 238961.25]])
+input_test_sample = np.array([[0, 23,  7890, 4567, 345678]])
 
 
 

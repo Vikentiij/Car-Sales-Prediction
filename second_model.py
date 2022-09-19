@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
@@ -7,23 +6,6 @@ from sklearn.model_selection import train_test_split
 from keras.models import Sequential
 from keras.layers import Dense
 
-
-def Prediction(dynamicInput, neuron_count):
-    print(dynamicInput)
-    input_test_sample = np.array([[int(val.strip()) for val in dynamicInput.values()]])
-    good_input_test_sample = np.array([[0, 41.8,  62812.09, 11609.38, 238961.25]])
-    # Scale input test sample data
-
-    model, scaler_out = NN(neuron_count)
-
-    #Predict output
-    output_predict_sample_scaled= model.predict(input_test_sample)
-    #print predict output
-    print('Predicted output(Scaled) =', output_predict_sample_scaled)
-    #Unscaled output
-    p=scaler_out.inverse_transform(output_predict_sample_scaled)
-    print('Predicted output/purshase amount', p)
-    return p    
 
 def NN(neuron_numbers):
     #Import data
@@ -47,6 +29,8 @@ def NN(neuron_numbers):
     scaler_out = MinMaxScaler()
     output_scaled = scaler_out.fit_transform(output)
 
+    input_train, input_test, output_train, output_test= train_test_split(input_scaled, output_scaled, test_size=0.2)
+
     neuron_numbers=25
     #Create model
     model = Sequential()
@@ -55,8 +39,6 @@ def NN(neuron_numbers):
     model.add(Dense(1, activation='linear'))
     #print(model.summary())
 
-
-    input_train, input_test, output_train, output_test= train_test_split(input_scaled, output_scaled, test_size=0.2)
     #Train model
     model.compile(optimizer = 'adam', loss = 'mean_squared_error', metrics=['accuracy'])
     epochs_hist = model.fit(input_train, output_train, epochs=20, batch_size=10, verbose=1, validation_data=(input_test, output_test))
@@ -65,13 +47,9 @@ def NN(neuron_numbers):
     MSE = mean_squared_error(output_test, predictions)
     print(f'Error: {MSE:.20f} %')
 
-    return model, scaler_out
+    return MSE
 
-
-
-    
-
-# NN(25)
+NN(25)
 
 
 
@@ -99,5 +77,3 @@ def NN(neuron_numbers):
 #Unscale output
 #output_predict_sample = scaler_out.inverse_transform(output_predict_sample_scaled)
 #print('Predicted Output / Purchase Amount ', output_predict_sample)
-
-
